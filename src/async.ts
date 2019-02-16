@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-export const Async = (target: object, propertyKey: string | symbol): PropertyDecorator => {
+export function Async(target: object, propertyKey: string | symbol): PropertyDecorator {
     let value: any;
 
     return Object.defineProperty(target, propertyKey, {
@@ -13,4 +13,4 @@ export const Async = (target: object, propertyKey: string | symbol): PropertyDec
             }
         },
     });
-};
+}

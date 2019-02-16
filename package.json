@@ -1,10 +1,10 @@
 {
   "name": "ngx-async",
   "version": "1.0.3",
-  "description": "",
+  "description": "Unwrap observable to class property",
   "main": "index.js",
   "typings": "index.d.ts",
-  "author": "Bobrovskih A.",
+  "author": "Bobrovskih A. <bobrovskih.artur@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "rxjs": "^6.4.0"
@@ -16,5 +16,18 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w"
+  },
+  "keywords": [
+    "angular",
+    "rxjs",
+    "async",
+    "observable",
+    "decorator",
+    "bind"
+  ],
+  "homepage": "https://github.com/Bobrovskih/ngx-async#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bobrovskih/ngx-async.git"
   }
 }

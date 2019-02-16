@@ -4,5 +4,16 @@
   "description": "",
   "main": "index.js",
   "author": "Bobrovskih A.",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
+  },
+  "dependencies": {
+    "rxjs": "^6.4.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  }
 }

@@ -4,12 +4,14 @@ Bind observable to class property.
 Unlike async pipe it works in component.
 
 
-## Install
-`npm install ngx-async`
-
-
 ## Demo
+
 [Live example on stackblitz](https://stackblitz.com/edit/angular-msfh9g)
+
+
+## Install
+
+`npm install ngx-async`
 
 
 ## Usage

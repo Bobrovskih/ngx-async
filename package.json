@@ -1,7 +1,7 @@
 {
   "name": "ngx-async",
-  "version": "1.0.3",
-  "description": "Unwrap observable to class property",
+  "version": "1.0.4",
+  "description": "Bind observable to class property",
   "main": "index.js",
   "typings": "index.d.ts",
   "author": "Bobrovskih A. <bobrovskih.artur@gmail.com>",

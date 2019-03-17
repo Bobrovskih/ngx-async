@@ -4,6 +4,7 @@
         "quotemark": [
             true,
             "single"
-        ]
+        ],
+        "ordered-imports": false
     }
 }

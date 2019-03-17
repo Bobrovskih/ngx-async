@@ -6,7 +6,7 @@ Unlike async pipe it works in component.
 
 ## Demo
 
-[Live example on stackblitz](https://stackblitz.com/edit/angular-msfh9g)
+[Live example on stackblitz](https://stackblitz.com/edit/angular-ngx-async-demo)
 
 
 ## Install
@@ -18,10 +18,10 @@ Unlike async pipe it works in component.
 
 component.ts
 ```typescript
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 import { interval } from 'rxjs';
-import { map } from 'rxjs/operators'
+import { map } from 'rxjs/operators';
 
 import { Async } from 'ngx-async';
 
@@ -30,10 +30,15 @@ import { Async } from 'ngx-async';
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ]
 })
-export class AppComponent  {
+export class AppComponent implements OnDestroy {
   @Async currentTime = interval(1000).pipe(
     map(() => Date.now()),
-  )
+  );
+
+  ngOnDestroy() {
+    // assign null for unsubscribe
+    this.currentTime = null;
+  }
 }
 ```
 

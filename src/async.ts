@@ -7,14 +7,16 @@ export const Async: PropertyDecorator = (target: object, propertyKey: string | s
     return Object.defineProperty(target, propertyKey, {
         get() {
             const instance = instances.get(this);
-            return instance.value;
+            if (instance) {
+                return instance.value;
+            }
         },
         set(input) {
-            instances.add(this, input);
-            const instance = instances.get(this);
+            const instance = instances.add(this, input);
 
             if (utils.likeObservable(input)) {
                 utils.unsubscribe(instance.subscription);
+                instance.value = undefined;
                 instance.subscription = input.subscribe((e: any) => instance.value = e);
             } else {
                 instance.value = input;

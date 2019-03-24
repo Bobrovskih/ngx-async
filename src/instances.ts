@@ -10,26 +10,32 @@ export class Instances {
     private instances: Instance[] = [];
 
     public add(self: any, value: any) {
-        if (this.has(self)) {
-            return;
+        const found = this.get(self);
+        if (found) {
+            return found;
         }
-        const instance: Instance = { self, value, subscription: null };
+        const instance: Instance = {
+            self,
+            value,
+            subscription: null,
+        };
         this.instances.push(instance);
+        return instance;
     }
 
     public get(self: any) {
         const instance = this.instances.find((item: any) => item.self === self);
-        if (!instance) {
-            throw new Error('Cannot find instance ' + JSON.stringify(self));
-        }
         return instance;
     }
 
     public remove(self: any) {
-        this.instances = this.instances.filter((instance) => instance.self === self);
-    }
-
-    private has(self: any): boolean {
-        return this.instances.some((instance) => instance.self === self);
+        for (let i = 0; i < this.instances.length; i++) {
+            const instance = this.instances[i];
+            if (instance.self === self) {
+                this.instances.splice(i, 1);
+                return;
+            }
+        }
+        throw new Error('Cannot remove instance ' + JSON.stringify(self));
     }
 }

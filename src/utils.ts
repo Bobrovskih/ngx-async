@@ -1,6 +1,6 @@
 import { Observable, isObservable, SubscriptionLike } from 'rxjs';
 
-export const likeObservable = (input: any) => {
+export const likeObservable = (input: any): boolean => {
     if (input instanceof Observable) {
         return true;
     }
@@ -12,7 +12,7 @@ export const likeObservable = (input: any) => {
     return false;
 };
 
-export const unsubscribe = (sub: SubscriptionLike | null) => {
+export const unsubscribe = (sub: SubscriptionLike | null): void => {
     if (sub) {
         sub.unsubscribe();
         sub = null;

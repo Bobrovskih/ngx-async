@@ -1,21 +1,26 @@
-import { SubscriptionLike } from 'rxjs';
-
 import * as utils from './utils';
+import { Instances } from './instances';
+
+const instances = new Instances();
 
 export const Async: PropertyDecorator = (target: object, propertyKey: string | symbol) => {
-    let value: any;
-    let subscription: SubscriptionLike | null;
-
     return Object.defineProperty(target, propertyKey, {
-        get: () => value,
-        set: (input) => {
+        get() {
+            const instance = instances.get(this);
+            return instance.value;
+        },
+        set(input) {
+            instances.add(this, input);
+            const instance = instances.get(this);
+
             if (utils.likeObservable(input)) {
-                utils.unsubscribe(subscription);
-                subscription = input.subscribe((e: any) => value = e);
+                utils.unsubscribe(instance.subscription);
+                instance.subscription = input.subscribe((e: any) => instance.value = e);
             } else {
-                value = input;
+                instance.value = input;
                 if (input === null) {
-                    utils.unsubscribe(subscription);
+                    utils.unsubscribe(instance.subscription);
+                    instances.remove(this);
                 }
             }
         },

@@ -6,13 +6,13 @@ const instances = new Instances();
 export const Async: PropertyDecorator = (target: object, propertyKey: string | symbol) => {
     return Object.defineProperty(target, propertyKey, {
         get() {
-            const instance = instances.get(this);
+            const instance = instances.get(this, propertyKey);
             if (instance) {
                 return instance.value;
             }
         },
         set(input) {
-            const instance = instances.add(this, input);
+            const instance = instances.add(this, propertyKey, input);
 
             if (utils.likeObservable(input)) {
                 utils.unsubscribe(instance.subscription);
@@ -22,7 +22,7 @@ export const Async: PropertyDecorator = (target: object, propertyKey: string | s
                 instance.value = input;
                 if (input === null) {
                     utils.unsubscribe(instance.subscription);
-                    instances.remove(this);
+                    instances.remove(this, propertyKey);
                 }
             }
         },
